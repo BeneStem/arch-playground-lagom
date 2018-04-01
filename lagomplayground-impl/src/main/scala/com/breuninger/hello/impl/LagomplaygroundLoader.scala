@@ -1,11 +1,9 @@
-package com.example.hello.impl
+package com.breuninger.hello.impl
 
-import com.example.hello.api.LagomplaygroundService
+import com.breuninger.hello.api.LagomplaygroundService
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
-import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
-import com.lightbend.lagom.scaladsl.persistence.cassandra.CassandraPersistenceComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import play.api.libs.ws.ahc.AhcWSComponents
@@ -25,13 +23,7 @@ class LagomplaygroundLoader extends LagomApplicationLoader {
 
 abstract class LagomplaygroundApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
-    with CassandraPersistenceComponents
-    with LagomKafkaComponents
     with AhcWSComponents {
 
   override lazy val lagomServer: LagomServer = serverFor[LagomplaygroundService](wire[LagomplaygroundServiceImpl])
-
-  override lazy val jsonSerializerRegistry: LagomplaygroundSerializerRegistry.type = LagomplaygroundSerializerRegistry
-
-  persistentEntityRegistry.register(wire[LagomplaygroundEntity])
 }
