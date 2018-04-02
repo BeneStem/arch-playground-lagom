@@ -20,8 +20,6 @@ lazy val `example-impl` = (project in file("example-impl"))
   .enablePlugins(LagomScala)
   .settings(
     libraryDependencies ++= Seq(
-      lagomScaladslPersistenceCassandra,
-      lagomScaladslKafkaBroker,
       macwire
     )
   )
