@@ -1,11 +1,12 @@
 package com.breuninger.example.api
 
 import akka.NotUsed
-import com.breuninger.example.domain.Example
-import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
+import play.api.libs.json.{Format, Json}
 
 trait ExampleService extends Service {
+
+  def createExample: ServiceCall[CreateExample, Example]
 
   def getExample(id: String): ServiceCall[NotUsed, Example]
 
@@ -13,7 +14,20 @@ trait ExampleService extends Service {
     import Service._
     named("example")
       .withCalls(
-        restCall(Method.GET, "/api/example/:id", getExample _)
+        pathCall("/api/examples", createExample _),
+        pathCall("/api/examples/:id", getExample _)
       )
   }
+}
+
+case class Example(id: String, text: String)
+
+object Example {
+  implicit val format: Format[Example] = Json.format[Example]
+}
+
+case class CreateExample(text: String)
+
+object CreateExample {
+  implicit val format: Format[CreateExample] = Json.format
 }

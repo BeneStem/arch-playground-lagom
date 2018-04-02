@@ -17,16 +17,17 @@ lazy val `example-api` = (project in file("example-api"))
   )
 
 lazy val `example-impl` = (project in file("example-impl"))
-  .enablePlugins(LagomScala)
+  .enablePlugins(LagomScala, SbtReactiveAppPlugin)
   .settings(
     libraryDependencies ++= Seq(
+      lagomScaladslPersistenceCassandra,
       macwire
     )
   )
   .dependsOn(`example-api`)
 
 lazy val `web-gateway` = (project in file("web-gateway"))
-  .enablePlugins(PlayScala && LagomPlay)
+  .enablePlugins(PlayScala && LagomPlay, SbtReactiveAppPlugin)
   .settings(
     libraryDependencies ++= Seq(
       lagomScaladslServer,
@@ -35,5 +36,5 @@ lazy val `web-gateway` = (project in file("web-gateway"))
   )
   .dependsOn(`example-api`)
 
-lagomCassandraEnabled in ThisBuild := false
+lagomCassandraCleanOnStart in ThisBuild := false
 lagomKafkaEnabled in ThisBuild := false

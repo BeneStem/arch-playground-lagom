@@ -1,5 +1,4 @@
-@import com.breuninger.example.domain.Example
-
+@import com.breuninger.example.api.Example
 @(example: Example)
 
 <!DOCTYPE html>
@@ -8,5 +7,6 @@
   </head>
   <body>
     <h1>@example.id</h1>
+    <p>@example.text</p>
   </body>
 </html>
