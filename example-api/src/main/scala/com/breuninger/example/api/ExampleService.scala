@@ -5,7 +5,6 @@ import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
 import play.api.libs.json.{Format, Json}
 
 trait ExampleService extends Service {
-
   def createExample: ServiceCall[CreateExample, Example]
 
   def getExample(id: String): ServiceCall[NotUsed, Example]

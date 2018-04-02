@@ -7,7 +7,14 @@ scalaVersion in ThisBuild := "2.12.5"
 val macwire = "com.softwaremill.macwire" %% "macros" % "2.3.0" % "provided"
 
 lazy val `arch-playground-lagom` = (project in file("."))
-  .aggregate(`example-api`, `example-impl`, `web-gateway`)
+  .aggregate(`common`, `example-api`, `example-impl`, `web-gateway`)
+
+lazy val common = (project in file("common"))
+  .settings(
+    libraryDependencies ++= Seq(
+      lagomScaladslApi
+    )
+  )
 
 lazy val `example-api` = (project in file("example-api"))
   .settings(
@@ -15,6 +22,7 @@ lazy val `example-api` = (project in file("example-api"))
       lagomScaladslApi
     )
   )
+  .dependsOn(common)
 
 lazy val `example-impl` = (project in file("example-impl"))
   .enablePlugins(LagomScala, SbtReactiveAppPlugin)

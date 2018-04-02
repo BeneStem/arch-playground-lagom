@@ -20,7 +20,7 @@ class ExampleServiceImpl(persistentEntityRegistry: PersistentEntityRegistry)(imp
   }
 
   override def getExample(id: String) = ServiceCall { _ =>
-    refFor(id).ask(GetExample(id)).map {
+    refFor(id).ask(GetExample).map {
       case Some(example) =>
         api.Example(id, example.text)
       case None =>

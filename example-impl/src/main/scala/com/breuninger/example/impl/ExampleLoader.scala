@@ -20,7 +20,6 @@ abstract class ExampleApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
     with AhcWSComponents
     with CassandraPersistenceComponents {
-
   override lazy val lagomServer: LagomServer = serverFor[ExampleService](wire[ExampleServiceImpl])
   override lazy val jsonSerializerRegistry: ExampleSerializerRegistry.type = ExampleSerializerRegistry
 
