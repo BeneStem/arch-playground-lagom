@@ -1,7 +1,7 @@
 package com.breuninger.example
 
-import com.breuninger.example.service.ExampleService
-import com.breuninger.example.service.ExampleServiceImpl
+import com.breuninger.example.api.ExampleService
+import com.breuninger.example.api.ExampleServiceImpl
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
